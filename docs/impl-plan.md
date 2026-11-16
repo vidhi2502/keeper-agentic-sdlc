@@ -2,7 +2,7 @@
 
 | Task ID | Description | Priority | Depends On | Requirement IDs | Status |
 |---|---|---|---|---|---|
-| T1 [all] (KEEP-6) | Spring Boot project setup: create the Maven project with Java 17, `spring-boot-starter-web`, and `spring-boot-starter-test`; add baseline ignore rules for local secret files and commit no secret values. | P0 | — | NFR-1, NFR-5, NFR-12 | Not Started |
+| T1 [all] (KEEP-6) | Spring Boot project setup: create the Maven project with Java 17, `spring-boot-starter-web`, and `spring-boot-starter-test`; add baseline ignore rules for local secret files and commit no secret values. | P0 | — | NFR-1, NFR-5, NFR-12 | Done |
 | T2 [KEEP-3, KEEP-4] (KEEP-11) | Task model, thread-safe in-memory repository, and service: implement CRUD and completion operations, Unicode title validation (trimmed, at most 100 code points), creation-order preservation, and immutable snapshots. | P0 | T1 | FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, NFR-3, NFR-6, NFR-11 | Not Started |
 | T3 [KEEP-3, KEEP-4] (KEEP-7) | Task REST controller and error handler: expose the documented `/api/tasks` routes, JSON request/response shapes, 400 invalid-title errors, 404 unknown-task errors, and the consistent error envelope. | P0 | T2 | FR-3, FR-4, FR-6, NFR-2, NFR-4, NFR-9 | Not Started |
 | T4 [KEEP-3, KEEP-4, KEEP-5] (KEEP-10) | Frontend (`index.html`, `style.css`, `app.js`): implement add/list, complete/uncomplete, delete, All/Active/Done filters, accessible responsive controls, current-filter updates, and safe text rendering. | P0 | T3 | FR-1, FR-2, FR-3, FR-5, FR-7, FR-8, FR-9, NFR-1, NFR-4, NFR-7, NFR-8, NFR-9, NFR-10 | Not Started |
