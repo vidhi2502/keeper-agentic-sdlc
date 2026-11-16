@@ -8,15 +8,17 @@ Each stage is a custom agent defined in `.github/agents/`, coordinated by an orc
 2. Architecture -> docs/architecture.md
 3. Design Review -> docs/design-review.md (and updates architecture.md)
 4. Implementation Planning -> docs/impl-plan.md
-5. Implementation -> src/main/java and src/test/java
+5. 5. Implementation -> src/main/java, src/main/resources/static and src/test/java
 6. Code Review -> docs/code-review.md
 7. Verification -> docs/verification-report.md
 8. Pull Request -> docs/pr-description.md, CHANGELOG.md and the GitHub PR
 
 ## Technology stack
-- Language: Java 17
-- Build tool: Maven
-- Testing: JUnit 5 (coverage via JaCoCo)
+- Backend: Java 17, Spring Boot (REST API), Maven
+- Frontend: plain HTML, CSS and JavaScript in src/main/resources/static (no frameworks)
+- Storage: in-memory
+- Testing: JUnit 5 and Spring Boot Test (MockMvc)
+- Work tracking: Jira via the Atlassian MCP tools
 - Hook scripts: PowerShell scripts in .github/hooks/scripts/
 
 ## Rules for EVERY agent
