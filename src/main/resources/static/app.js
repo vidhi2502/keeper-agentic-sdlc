@@ -16,11 +16,31 @@ async function request(path, options) {
         return null;
     }
 
-    const body = await response.json();
+    let body;
+    try {
+        body = await response.json();
+    } catch (error) {
+        const message = response.ok
+            ? "The server returned an invalid response."
+            : `The request failed with status ${response.status}.`;
+        throw new Error(message);
+    }
     if (!response.ok) {
-        throw new Error(body.error?.message || "The request could not be completed.");
+        const message = body && typeof body === "object" && typeof body.error?.message === "string"
+            ? body.error.message
+            : "The request could not be completed.";
+        throw new Error(message);
     }
     return body;
+}
+
+function isTask(value) {
+    return value !== null
+        && typeof value === "object"
+        && Number.isSafeInteger(value.id)
+        && value.id > 0
+        && typeof value.title === "string"
+        && typeof value.done === "boolean";
 }
 
 function showError(message) {
@@ -40,7 +60,8 @@ function visibleTasks() {
 function renderTasks() {
     taskList.replaceChildren();
 
-    for (const task of visibleTasks()) {
+    const displayedTasks = visibleTasks();
+    for (const task of displayedTasks) {
         const item = document.createElement("li");
         item.className = "task-item";
 
@@ -71,7 +92,10 @@ function renderTasks() {
         taskList.append(item);
     }
 
-    emptyMessage.hidden = tasks.length > 0;
+    emptyMessage.textContent = tasks.length === 0
+        ? "No tasks yet."
+        : "No tasks match this filter.";
+    emptyMessage.hidden = displayedTasks.length > 0;
 }
 
 function selectFilter(filter) {
@@ -84,7 +108,11 @@ function selectFilter(filter) {
 
 async function loadTasks() {
     try {
-        tasks = await request("/api/tasks");
+        const responseTasks = await request("/api/tasks");
+        if (!Array.isArray(responseTasks) || !responseTasks.every(isTask)) {
+            throw new Error("The server returned an invalid task list.");
+        }
+        tasks = responseTasks;
         renderTasks();
     } catch (error) {
         showError(error.message);
@@ -97,6 +125,9 @@ async function addTask(title) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title })
     });
+    if (!isTask(task)) {
+        throw new Error("The server returned an invalid task.");
+    }
     tasks.push(task);
     renderTasks();
 }
@@ -108,6 +139,9 @@ async function updateTask(id, done) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ done })
         });
+        if (!isTask(updatedTask) || updatedTask.id !== id) {
+            throw new Error("The server returned an invalid task.");
+        }
         tasks = tasks.map((task) => task.id === id ? updatedTask : task);
         renderTasks();
         showError("");

@@ -1,5 +1,6 @@
 package com.keeper.task;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,10 +64,10 @@ public class TaskController {
      */
     @PatchMapping("/{id}")
     public Task updateTask(@PathVariable long id, @RequestBody UpdateTaskRequest request) {
-        if (request == null || request.done() == null) {
+        if (request == null || request.done() == null || !request.done().isBoolean()) {
             throw new InvalidTaskRequestException("The done field must be a boolean.");
         }
-        return taskService.setDone(id, request.done());
+        return taskService.setDone(id, request.done().booleanValue());
     }
 
     /**
@@ -94,6 +95,6 @@ public class TaskController {
      *
      * @param done desired completion state
      */
-    public record UpdateTaskRequest(Boolean done) {
+    public record UpdateTaskRequest(JsonNode done) {
     }
 }
