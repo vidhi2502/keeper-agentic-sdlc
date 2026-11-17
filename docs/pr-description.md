@@ -14,7 +14,7 @@ Keeper is a to-do web app with a Spring Boot REST API and a plain HTML/CSS/JS fr
 `mvn test` — 29 tests, 0 failures, 0 errors, 0 skipped; BUILD SUCCESS.
 
 ## Known Limitations
-- Manual browser checks were run in Edge only; keyboard and narrow-screen checks remain open, and Firefox/Safari were not tested.
+- Manual browser checks were run in Edge only; Chrome, Firefox and Safari were not tested.
 - Startup time and UI update time were not measured; only one API timing check was run.
 - Restart data loss was verified by the in-memory design only; no restart test was run.
 
