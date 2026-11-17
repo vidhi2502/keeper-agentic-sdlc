@@ -291,3 +291,5 @@
 - 2026-11-17T09:19:23.2865507Z | PostToolUse | apply_patch
 - 2026-11-17T09:19:51.3303844Z | PostToolUse | powershell
 - 2026-11-17T09:20:02.6552439Z | PostToolUse | add_artifact_or_reference
+- 2026-11-17T10:02:41.3951107Z | PostToolUse | view
+- 2026-11-17T10:02:42.3758507Z | PostToolUse | powershell
