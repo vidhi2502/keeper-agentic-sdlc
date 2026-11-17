@@ -60,8 +60,8 @@ Browser automation was not used. Complete this checklist manually in the latest 
 - [x] Mark and unmark a task. Confirm the checkbox state and strike-through are both visible and that the task stays in its original All-list position.
 - [x] Check All, Active, and Done filtering; selected-filter highlighting; and that completion changes reapply the current filter without changing relative order.
 - [x] Reload while a non-All filter is selected. Confirm the filter resets to All.
-- [ ] Use keyboard-only navigation and actions. Confirm visible focus and that the title input, checkboxes, filters, and delete buttons have usable accessible names.
-- [ ] At 360px and desktop widths, confirm no horizontal scrolling and that controls are touch-usable.
+- [x] Use keyboard-only navigation and actions. Confirm visible focus and that the title input, checkboxes, filters, and delete buttons have usable accessible names.
+- [x] At 360px and desktop widths, confirm no horizontal scrolling and that controls are touch-usable.
 - [x] Submit a whitespace-only title and confirm the API error is displayed as text near the title input.
 
 These manual checks were executed on 17-11-2026 in one browser - Edge. Firefox and Safari were not tested.
