@@ -63,6 +63,15 @@ class TaskServiceTest {
     }
 
     @Test
+    void storesOneThousandTasks() {
+        for (int index = 0; index < 1000; index++) {
+            service.createTask("task-" + index);
+        }
+
+        assertEquals(1000, service.listTasks().size());
+    }
+
+    @Test
     void deletesExistingTaskAndReportsMissingTaskIds() {
         Task task = service.createTask("remove");
 
